@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<section>
+    <fieldset>
+        <legend>Sexo</legend>
+        <label for="lstSexo">Sexo</label>
+        <select id="lstSexo">
+            <option>--Seleccione uno--</option>
+            <option value="H">Hombre</option>
+            <option value="M">Mujer</option>
+        </select>
+    </fieldset>
+</section>
+<section id="estadoActual">
+    <fieldset>
+        <legend>Estado actual</legend>
+    </fieldset>
+</section>
+<section id="historial">
+    <fieldset>
+        <legend>Historial cl&iacute;nico</legend>
+    </fieldset>
+</section>
+<section id="estiloVida">
+    <fieldset><legend>Estilo de vida</legend></fieldset>
+</section>
+<section id="ocupacion">
+    <fieldset>
+        <legend>Ocupaci&oacute;n</legend>
+    </fieldset>
+</section>
+
+@section Scripts{
+    <script src="~/Scripts/HomeIndex.js"></script>    
+}

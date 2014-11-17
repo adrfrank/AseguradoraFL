@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @RenderSection("Head", false)
+</head>
+<body>
+    <header>
+        <hgroup class="wrapper">
+            <h1>Aseguradora</h1>
+            <p>Proyecto de aseguradora usando Fuzzy Lite</p>
+        </hgroup>
+    </header>
+    <section class="wrapper">
+        <menu class="main-menu">
+            <ul>
+                <li class="active"> 
+                    <a href="#estadoActual">Estado actual</a>
+                </li>
+                <li>
+                    <a href="#historial">Historial clínico</a>
+                </li>
+                <li>
+                    <a href="#estiloVida">Estilo de vida</a>
+                </li>                  
+                <li>                   
+                    <a href="#ocupacion">Ocupación</a>
+                </li>
+            </ul>
+        </menu>
+        @RenderBody()
+    </section>
+    <footer>
+        <div class="wrapper">
+            <a href="http://twitter.com/adrfrank" target="_blank">Adrian Gonzalez</a> | Prolog | CUCEI UdG
+        </div>
+    </footer>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    @RenderSection("Scripts",false)
+</body>
+</html>
