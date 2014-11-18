@@ -10,6 +10,7 @@ debug = true;
 window.page = {
     factors: undefined,
     factorsUrl: "/Home/Factors",
+    calcularUrl : "/Home/CalcularPoliza",
     estadoActualId: "#estadoActual",
     historialId: "#historial",
     estiloVidaId: "#estiloVida",
@@ -17,6 +18,7 @@ window.page = {
     sexoId: "#lstSexo",
     init: function () {
         this.loadFactors();
+        $(page.sexoId).on("change", page.loadControls);
     },
     loadFactors: function () {
         $.getJSON(page.factorsUrl).done(function (json) {
@@ -35,12 +37,63 @@ window.page = {
             alert("Factos not loaded");
             return;
         }
-        page.loadValues(page.estadoActualId, page.factors.EnfermedadesHombre);
-        page.loadValues(page.historialId, page.factors.EnfermedadesHombre);
+        if ($(page.sexoId).val() == "M") {
+            page.loadValues(page.estadoActualId, page.factors.EnfermedadesMujer);
+            page.loadValues(page.historialId, page.factors.EnfermedadesMujer);
+        } else {
+            page.loadValues(page.estadoActualId, page.factors.EnfermedadesHombre);
+            page.loadValues(page.historialId, page.factors.EnfermedadesHombre);
+        }
         page.loadValues(page.estiloVidaId, page.factors.EstiloDeVida);
         page.loadValues(page.ocupacionId, page.factors.Ocupaciones);
-        
+       
+        $(".block input").on("change", page.calculate);
+        page.calculate();
 
+    },
+    calculate: function (e) {
+        var iEstadoActual = page.calculateInput(page.estadoActualId);
+        var iHistorialClinico = page.calculateInput(page.historialId);
+        var iEstiloVida = page.calculateInput(page.estiloVidaId);
+        var iOcupacion = page.calculateInput(page.ocupacionId);
+
+        var factores = {
+            EstadoActual : iEstadoActual,
+            HistorialClinico :  iHistorialClinico,
+            EstiloVida : iEstiloVida,
+            Ocupacion : iOcupacion
+        };
+
+        $.ajax({
+            url: page.calcularUrl,
+            type: "POST",
+            dataType: "json",
+           // contentType: "application/json",
+            data: factores
+        }).done(function (res) {
+            if (debug)
+                console.log("Resultado: ", res);
+            page.showResult(res);
+        }).fail(function (err) {
+            if (debug)
+                console.log("Error: ", err);
+        });
+        console.log(factores);
+    },
+    showResult: function (result) {
+       
+    },
+    calculateInput: function (blockId) {
+        var sum = 0, cont = 0;
+        $(blockId).find(":checked").each(function (index,item) {
+            sum += parseFloat(item.value);
+            cont++
+        });
+        var result = 0
+        if (cont != 0)
+            result = sum ;
+        result = result > 100 ? 100 : result;
+        return result;
     },
     loadValues: function (containerId, data) {
         var prefix = containerId.substr(1);
@@ -55,8 +108,9 @@ window.page = {
             if (debug)
                 console.log(item.name, ": ", item.value);
             var cell = emptycell.clone();
-            cell.append($("<input type='checkbox'>").attr("id","chk"+prefix+i).val(item.value));
-            cell.append($("<label>").attr("for","chk"+prefix+i).html(item.name));
+            cell.append($("<label>").attr("for", "chk" + prefix + i)
+                .append($("<input type='checkbox'>").attr("id", "chk" + prefix + i).val(item.value))
+                .append(item.name));
             row.append(cell);
             if (++cont % 3 == 0) {
                 rows.push(row);
