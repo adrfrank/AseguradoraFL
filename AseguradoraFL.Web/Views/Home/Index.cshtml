@@ -2,7 +2,7 @@
     ViewBag.Title = "Index";
 }
 
-<section class="block">
+<section >
     <fieldset>
         <legend>Sexo</legend>
         <label for="lstSexo">Sexo</label>
@@ -13,25 +13,55 @@
         </select>
     </fieldset>
 </section>
-<section id="estadoActual" class="block">
-    <fieldset>
-        <legend>Estado actual</legend>
-    </fieldset>
-</section>
-<section id="historial" class="block">
-    <fieldset>
-        <legend>Historial cl&iacute;nico</legend>
-    </fieldset>
-</section>
-<section id="estiloVida" class="block">
-    <fieldset><legend>Estilo de vida</legend></fieldset>
-</section>
-<section id="ocupacion" class="block">
-    <fieldset>
-        <legend>Ocupaci&oacute;n</legend>
-    </fieldset>
-</section>
+<div role="tabpanel">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active" role="presentation">
+            <a role="tab" aria-controls="estadoActual" href="#estadoActual" data-toggle="tab">Estado actual</a>
+        </li>
+        <li role="presentation">
+            <a role="tab" aria-controls="historial" href="#historial" data-toggle="tab">Historial clínico</a>
+        </li>
+        <li role="presentation">
+            <a role="tab" aria-controls="estiloVida" href="#estiloVida" data-toggle="tab">Estilo de vida</a>
+        </li>
+        <li role="presentation">
+            <a role="tab" aria-controls="ocupacion" href="#ocupacion" data-toggle="tab">Ocupación</a>
+        </li>
+        <li role="presentation">
+            <a role="tab" aria-controls="resultados" href="#resultados" data-toggle="tab">Resultado</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active block" id="estadoActual">
+            <fieldset>
+                <legend>Estado actual</legend>
+            </fieldset>
+        </div>
+        <div id="historial" role="tabpanel" class="tab-pane block">
+            <fieldset>
+                <legend>Historial cl&iacute;nico</legend>
+            </fieldset>
+        </div>
+        <section id="estiloVida" role="tabpanel" class="tab-pane block">
+            <fieldset><legend>Estilo de vida</legend></fieldset>
+        </section>
+        <div id="ocupacion" role="tabpanel" class="tab-pane block">
+            <fieldset>
+                <legend>Ocupaci&oacute;n</legend>
+            </fieldset>
+        </div>
+        <div id="resultados" role="tabpanel" class="tab-pane block">
+            <fieldset>
+                <legend>Resultado: </legend>
+                <div class="alert-success" id="lblResultado">Resultado o salida</div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+
 
 @section Scripts{
+    <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/HomeIndex.js"></script>    
 }

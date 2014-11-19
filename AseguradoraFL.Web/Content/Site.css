@@ -21,6 +21,7 @@ body, html {
         text-shadow: 1px 1px #444 ;
     }
 
+    body > header  small{color: #f0f0f0;}
     body > footer{
         text-align: right;
         position: fixed;
@@ -35,7 +36,7 @@ body, html {
 
     body > section{
         padding: 10px;
-        background-color: #eee;
+        background-color: #ffffff;
         box-shadow:#808080 2px 2px 10px;
         min-height:200px;
         border-radius: 0px 0px 4px 4px;
@@ -44,41 +45,14 @@ body, html {
       
     }
 
-    .main-menu {
-        display:block;
-        margin-top:3px;
-        margin-bottom: 10px;
-        height:30px;
-        
+    .block{
+        padding:10px;
         
     }
+    
 
-    .main-menu ul{
-        list-style: none;
-    }
-    .main-menu li{ 
-        display: inline-block;
-        min-width: 100px;
-        /*text-align: center;*/
-    }
-    .main-menu li a{
-        text-decoration: none;
-        color: #12429a;
-        font-size: 1.1em;
-        text-shadow: 1px 1px #ccc ;
-        padding: 3px 10px;
-        transition:all .4s;
-    }
-    .main-menu li a:hover{
-        background-color: #12429a;
-        border-radius: 3px;
-        color: #ddd;
-        text-shadow:none;
-    }
-
-    .main-menu li.active a{
-        border-radius:3px;
-        border: 1px solid #aaa;
+    #lblResultado{
+        padding: 20px;
     }
 
 .wrapper{

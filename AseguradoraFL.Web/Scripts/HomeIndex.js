@@ -16,6 +16,7 @@ window.page = {
     estiloVidaId: "#estiloVida",
     ocupacionId: "#ocupacion",
     sexoId: "#lstSexo",
+    resultadoId: "#lblResultado",
     init: function () {
         this.loadFactors();
         $(page.sexoId).on("change", page.loadControls);
@@ -71,8 +72,7 @@ window.page = {
            // contentType: "application/json",
             data: factores
         }).done(function (res) {
-            if (debug)
-                console.log("Resultado: ", res);
+           
             page.showResult(res);
         }).fail(function (err) {
             if (debug)
@@ -81,7 +81,21 @@ window.page = {
         console.log(factores);
     },
     showResult: function (result) {
-       
+        var res = parseFloat(result);
+        var sres = "", cssClass = "";
+        if (res <= 30) {
+            sres = "Asegurado normal";
+            cssClass = "alert-success";
+        } else if (res <= 45) {
+            sres = "Asegurado por mas costo";
+            cssClass = "alert-warning";
+        } else {
+            sres = "Imposible de asegurar";
+            cssClass = "alert-danger";
+        }
+        if (debug)
+            console.log(sres, res);
+        $(page.resultadoId).html(sres).removeClass().addClass(cssClass);
     },
     calculateInput: function (blockId) {
         var sum = 0, cont = 0;
